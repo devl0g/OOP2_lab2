@@ -3,7 +3,9 @@
 #include "../../config.hpp"
 #include <QApplication>
 #include <QWidget>
-#include "../components/shapesCanvas.hpp"
+#include <QtWidgets/QMenuBar>
+#include <cstdint>
+#include <memory>
 
 MainWindow::MainWindow(QWidget* parent) noexcept : 
   QMainWindow(parent) {
@@ -19,10 +21,37 @@ MainWindow::~MainWindow() noexcept {
 
 void MainWindow::initUI() noexcept {
   setWindowTitle(tr(WINDOW_TITLE));
-  implementMenuBar();
 
-  setCentralWidget(new ShapesCanvas(this));
+  canvas = new ShapesCanvas(this);
+  setCentralWidget(canvas);
+
+  shapesMenu = menuBar()->addMenu(tr("&Фігури"));
+
+  connect(shapesMenu, &QMenu::triggered, this, &MainWindow::shapeSelected);
 }
 
-void MainWindow::implementMenuBar() noexcept {
+void MainWindow::updateShapesMenu() noexcept {
+  shapesMenu->clear();
+
+  for (const auto& shape : registeredShapes) {
+    auto action = shapesMenu->addAction(tr(shape->getShapeName()));
+    action->setChecked(selectedShapeID == shape->getShapeID());
+    action->setCheckable(true);
+    action->setData(shape->getShapeID());
+  }
+}
+
+// Slots
+
+void MainWindow::shapeSelected(QAction* action) {
+  const int64_t data = action->data().toLongLong();
+  selectedShapeID = data;
+
+  for (const auto& shape : registeredShapes) {
+    if (shape->getShapeID() == data) {
+      canvas->setDrawingShape(std::move(shape->createInstance()));
+    }
+  }
+
+  updateShapesMenu();
 }

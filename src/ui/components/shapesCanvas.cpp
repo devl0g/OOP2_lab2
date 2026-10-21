@@ -1,6 +1,5 @@
 #include "shapesCanvas.hpp"
 #include "../../models/shapes/shape.hpp"
-#include "../../utils/logger.hpp"
 #include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPainter>
@@ -14,7 +13,6 @@ void ShapesCanvas::paintEvent(QPaintEvent* event) {
   painter.setRenderHint(QPainter::Antialiasing);
   painter.fillRect(rect(), QColor(255, 255, 255));
 
-  Logger::info("drawed!");
   for (const auto& shape : canvasShapes) {
     shape->renderShape(painter);
   }
@@ -34,8 +32,10 @@ void ShapesCanvas::mousePressEvent(QMouseEvent* event) {
     mouseState.dragEndX = position.x();
     mouseState.dragEndY = position.y();
 
-    drawingShape = currentShapeType->createInstance();
-    drawingShape->updateShapeConfig({ mouseState.dragStartX, mouseState.dragStartY }, { mouseState.dragEndX, mouseState.dragEndY });
+    if (currentShapeType) {
+      drawingShape = currentShapeType->createInstance();
+      drawingShape->updateShapeConfig({ mouseState.dragStartX, mouseState.dragStartY }, { mouseState.dragEndX, mouseState.dragEndY });
+    }
   }
 }
 

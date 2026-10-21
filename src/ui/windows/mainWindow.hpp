@@ -3,6 +3,12 @@
 
 #include <QWidget>
 #include <QMainWindow>
+#include <concepts>
+#include <cstdint>
+#include <memory>
+#include <vector>
+#include "../../models/shapes/shape.hpp"
+#include "../components/shapesCanvas.hpp"
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -11,12 +17,24 @@ public:
   explicit MainWindow(QWidget* parent = nullptr) noexcept;
   ~MainWindow() noexcept;
 
+  template<std::derived_from<Shape> T>
+  void registerShape() {
+    registeredShapes.push_back(std::make_unique<T>());
+    updateShapesMenu();
+  }
+
 private:
+  QMenu* shapesMenu;
+  ShapesCanvas* canvas;
+  uint64_t selectedShapeID { 0 };
+  std::vector<std::unique_ptr<Shape>> registeredShapes;
+
   void initUI() noexcept;
-  void implementMenuBar() noexcept;
+  void updateShapesMenu() noexcept;
 
 signals:
 private slots:
+  void shapeSelected(QAction* action);
 };
 
 #endif

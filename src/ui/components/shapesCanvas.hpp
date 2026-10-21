@@ -2,7 +2,6 @@
 #define INCLUDE_UI_COMPONENTS_SHAPES_CANVAS_HPP_
 
 #include "../../models/shapes/shape.hpp"
-#include "../../models/shapes/rectangle.hpp"
 #include <QWidget>
 #include <cstdint>
 #include <memory>
@@ -25,6 +24,10 @@ public:
     ShapesCanvas(const ShapesCanvas& other) = delete;
     ShapesCanvas& operator=(ShapesCanvas other) = delete;
 
+    void setDrawingShape(std::unique_ptr<Shape> shape) {
+      currentShapeType = std::move(shape);
+    }
+
 protected:
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
@@ -32,7 +35,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent* event) override;
 
 private:
-    std::unique_ptr<Shape> currentShapeType { std::make_unique<RectangleShape>() };
+    std::unique_ptr<Shape> currentShapeType { nullptr };
     MouseState mouseState {};
     std::unique_ptr<Shape> drawingShape { nullptr };
     std::vector<std::unique_ptr<Shape>> canvasShapes;
