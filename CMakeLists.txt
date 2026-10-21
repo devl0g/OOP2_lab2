@@ -18,6 +18,7 @@ qt_standard_project_setup()
 add_executable(Lab1
   ./src/main.cpp
   ./src/ui/windows/mainWindow.cpp
+  ./src/ui/components/shapesCanvas.cpp
 )
 
 target_link_libraries(Lab1 PRIVATE Qt6::Widgets)

@@ -3,6 +3,7 @@
 #include "../../config.hpp"
 #include <QApplication>
 #include <QWidget>
+#include "../components/shapesCanvas.hpp"
 
 MainWindow::MainWindow(QWidget* parent) noexcept : 
   QMainWindow(parent) {
@@ -20,8 +21,7 @@ void MainWindow::initUI() noexcept {
   setWindowTitle(tr(WINDOW_TITLE));
   implementMenuBar();
 
-  auto *centralContainer = new QWidget(this);
-  setCentralWidget(centralContainer);
+  setCentralWidget(new ShapesCanvas(this));
 }
 
 void MainWindow::implementMenuBar() noexcept {

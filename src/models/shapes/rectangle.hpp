@@ -51,7 +51,7 @@ public:
     pen.setColor(QColor(0, 0, 0));
     pen.setWidth(2);
     painter.setPen(pen);
-    painter.drawLine(start_position.x, start_position.y, end_position.x, end_position.y);
+    painter.drawRect(start_position.x, start_position.y, end_position.x - start_position.x, end_position.y - start_position.y);
   }
 
   void renderPhantomShape(QPainter& painter) const override {
@@ -60,7 +60,7 @@ public:
     pen.setColor(QColor(0, 0, 0, 100));
     pen.setWidth(2);
     painter.setPen(pen);
-    painter.drawLine(start_position.x, start_position.y, end_position.x, end_position.y);
+    painter.drawRect(start_position.x, start_position.y, end_position.x - start_position.x, end_position.y - start_position.y);
   }
 
   void updateShapeConfig(const Position& drag_start, const Position& drag_end) noexcept override {

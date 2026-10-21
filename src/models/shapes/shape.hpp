@@ -12,7 +12,7 @@ struct Position {
 
 class Shape {
 public:
-  ~Shape() noexcept = default;
+  virtual ~Shape() noexcept = default;
 
   [[nodiscard]] virtual char* getShapeName() const noexcept = 0;
   [[nodiscard]] virtual uint8_t getShapeID() const noexcept = 0;

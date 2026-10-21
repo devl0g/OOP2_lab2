@@ -1,13 +1,12 @@
 #ifndef INCLUDE_UI_COMPONENTS_SHAPES_CANVAS_HPP_
 #define INCLUDE_UI_COMPONENTS_SHAPES_CANVAS_HPP_
 
+#include "../../models/shapes/shape.hpp"
+#include "../../models/shapes/rectangle.hpp"
 #include <QWidget>
 #include <cstdint>
 #include <memory>
-#include <optional>
 #include <vector>
-
-class Shape;
 
 struct MouseState {
   bool isDragging { false };
@@ -33,7 +32,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent* event) override;
 
 private:
-    std::unique_ptr<Shape> currentShapeType { nullptr };
+    std::unique_ptr<Shape> currentShapeType { std::make_unique<RectangleShape>() };
     MouseState mouseState {};
     std::unique_ptr<Shape> drawingShape { nullptr };
     std::vector<std::unique_ptr<Shape>> canvasShapes;
