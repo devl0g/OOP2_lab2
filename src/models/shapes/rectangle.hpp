@@ -2,6 +2,7 @@
 #define INCLUDE_MODEL_SHAPES_RECTANGLE_HPP_
 
 #include "./shape.hpp"
+#include <memory>
 
 class RectangleShape : public Shape {
 public:
@@ -31,32 +32,36 @@ public:
     this->end_position = position;
   }
 
-  char* getShapeName() noexcept override {
+  char* getShapeName() const noexcept override {
     static char shape_name[] { "rectangle" };
     return shape_name;
   }
 
-  uint8_t getShapeID() noexcept override {
+  uint8_t getShapeID() const noexcept override {
     return 3;
-  };
+  }
 
-  void renderShape(QPainter& painter) override {
+  std::unique_ptr<Shape> createInstance() const noexcept override {
+    return std::make_unique<RectangleShape>();
+  }
+
+  void renderShape(QPainter& painter) const override {
     painter.setBrush(QBrush(QColor(255, 255, 0)));
     QPen pen;
     pen.setColor(QColor(0, 0, 0));
     pen.setWidth(2);
     painter.setPen(pen);
     painter.drawLine(start_position.x, start_position.y, end_position.x, end_position.y);
-  };
+  }
 
-  void renderPhantomShape(QPainter& painter) override {
+  void renderPhantomShape(QPainter& painter) const override {
     painter.setBrush(Qt::NoBrush);
     QPen pen;
     pen.setColor(QColor(0, 0, 0, 100));
     pen.setWidth(2);
     painter.setPen(pen);
     painter.drawLine(start_position.x, start_position.y, end_position.x, end_position.y);
-  };
+  }
 
   void updateShapeConfig(const Position& drag_start, const Position& drag_end) noexcept override {
     this->start_position = drag_start;

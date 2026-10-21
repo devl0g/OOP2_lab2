@@ -22,26 +22,30 @@ public:
     this->position = position;
   }
 
-  char* getShapeName() noexcept override {
+  char* getShapeName() const noexcept override {
     static char shape_name[] { "dot" };
     return shape_name;
   }
 
-  uint8_t getShapeID() noexcept override {
+  uint8_t getShapeID() const noexcept override {
     return 1;
-  };
+  }
 
-  void renderShape(QPainter& painter) override {
+  std::unique_ptr<Shape> createInstance() const noexcept override {
+    return std::make_unique<DotShape>();
+  }
+
+  void renderShape(QPainter& painter) const override {
     painter.setBrush(QBrush(QColor(0, 0, 0)));
     painter.setPen(Qt::NoPen);
     painter.drawEllipse(position.x - 2, position.y - 2, position.x + 2, position.y + 2);
-  };
+  }
 
-  void renderPhantomShape(QPainter& painter) override {
+  void renderPhantomShape(QPainter& painter) const override {
     painter.setBrush(QBrush(QColor(0, 0, 0, 100)));
     painter.setPen(Qt::NoPen);
     painter.drawEllipse(position.x - 2, position.y - 2, position.x + 2, position.y + 2);
-  };
+  }
 
   void updateShapeConfig(const Position& drag_start, const Position& drag_end) noexcept override {
     this->position = drag_end;

@@ -32,16 +32,20 @@ public:
     this->corner_position = position;
   }
 
-  char* getShapeName() noexcept override {
+  char* getShapeName() const noexcept override {
     static char shape_name[] { "oval" };
     return shape_name;
   }
 
-  uint8_t getShapeID() noexcept override {
+  uint8_t getShapeID() const noexcept override {
     return 4;
-  };
+  }
 
-  void renderShape(QPainter& painter) override {
+  std::unique_ptr<Shape> createInstance() const noexcept override {
+    return std::make_unique<OvalShape>();
+  }
+
+  void renderShape(QPainter& painter) const override {
     painter.setBrush(Qt::NoBrush);
     QPen pen;
     pen.setColor(QColor(0, 0, 0));
@@ -59,9 +63,9 @@ public:
         center_position.x + half_size.x,
         center_position.y + half_size.y
     );
-  };
+  }
 
-  void renderPhantomShape(QPainter& painter) override {
+  void renderPhantomShape(QPainter& painter) const override {
     painter.setBrush(Qt::NoBrush);
     QPen pen;
     pen.setColor(QColor(0, 0, 0, 100));
@@ -79,7 +83,7 @@ public:
         center_position.x + half_size.x,
         center_position.y + half_size.y
     );
-  };
+  }
 
   void updateShapeConfig(const Position& drag_start, const Position& drag_end) noexcept override {
     this->center_position = drag_start;
