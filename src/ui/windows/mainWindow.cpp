@@ -1,11 +1,7 @@
 #include "mainWindow.hpp"
 #include "../../utils/logger.hpp"
 #include "../../config.hpp"
-#include <QApplication>
-#include <QWidget>
 #include <QtWidgets/QMenuBar>
-#include <cstdint>
-#include <memory>
 
 MainWindow::MainWindow(QWidget* parent) noexcept : 
   QMainWindow(parent) {

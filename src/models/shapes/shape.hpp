@@ -2,8 +2,6 @@
 #define INCLUDE_MODEL_SHAPES_SHAPE_HPP_
 
 #include <QPainter>
-#include <cstdint>
-#include <memory>
 
 struct Position {
   int64_t x { 0 };

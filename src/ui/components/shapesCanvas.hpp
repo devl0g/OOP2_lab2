@@ -3,9 +3,6 @@
 
 #include "../../models/shapes/shape.hpp"
 #include <QWidget>
-#include <cstdint>
-#include <memory>
-#include <vector>
 
 struct MouseState {
   bool isDragging { false };

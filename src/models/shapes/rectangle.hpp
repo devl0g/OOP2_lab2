@@ -2,7 +2,6 @@
 #define INCLUDE_MODEL_SHAPES_RECTANGLE_HPP_
 
 #include "./shape.hpp"
-#include <memory>
 
 class RectangleShape : public Shape {
 public:

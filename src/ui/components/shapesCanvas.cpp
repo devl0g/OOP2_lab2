@@ -1,9 +1,5 @@
 #include "shapesCanvas.hpp"
-#include "../../models/shapes/shape.hpp"
-#include <QMouseEvent>
 #include <QPaintEvent>
-#include <QPainter>
-#include <memory>
 
 void ShapesCanvas::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);

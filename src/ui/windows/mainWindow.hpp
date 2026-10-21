@@ -1,13 +1,7 @@
 #ifndef INCLUDE_UI_WINDOWS_MAIN_WINDOW_HPP_
 #define INCLUDE_UI_WINDOWS_MAIN_WINDOW_HPP_
 
-#include <QWidget>
 #include <QMainWindow>
-#include <concepts>
-#include <cstdint>
-#include <memory>
-#include <vector>
-#include "../../models/shapes/shape.hpp"
 #include "../components/shapesCanvas.hpp"
 
 class MainWindow : public QMainWindow {

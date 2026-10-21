@@ -2,7 +2,6 @@
 #define INCLUDE_MODEL_SHAPES_OVAL_HPP_
 
 #include "./shape.hpp"
-#include <cstdlib>
 
 class OvalShape : public Shape {
 public:
