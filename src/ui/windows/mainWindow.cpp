@@ -21,7 +21,9 @@ void MainWindow::initUI() noexcept {
   canvas = new ShapesCanvas(this);
   setCentralWidget(canvas);
 
-  shapesMenu = menuBar()->addMenu(tr("&Фігури"));
+  menuBar()->addMenu(tr("&Файл"));
+  shapesMenu = menuBar()->addMenu(tr("&Об'єкти"));
+  menuBar()->addMenu(tr("&Довідка"));
 
   connect(shapesMenu, &QMenu::triggered, this, &MainWindow::shapeSelected);
 }

@@ -1,0 +1,86 @@
+classDiagram
+  direction LR
+
+  class QMainWindow
+  class QWidget
+
+  class MainWindow {
+    -QMenu* shapesMenu
+    -ShapesCanvas* canvas
+    -uint64_t selectedShapeID
+    -registeredShapes
+    -initUI()
+    -updateShapesMenu()
+    -shapeSelected(QAction*)
+    +registerShape~T~()
+  }
+
+  class ShapesCanvas {
+    -currentShapeType
+    -drawingShape
+    -canvasShapes
+    -MouseState mouseState
+    +setDrawingShape(shape)
+    #paintEvent()
+    #mousePressEvent()
+    #mouseMoveEvent()
+    #mouseReleaseEvent()
+  }
+
+  class MouseState {
+    <<struct>>
+    +bool isDragging
+    +dragStartX, dragStartY
+    +dragEndX, dragEndY
+  }
+
+  class Shape {
+    <<abstract>>
+    +getShapeName()
+    +getShapeID()
+    +createInstance()
+    +renderShape(painter)
+    +renderPhantomShape(painter)
+    +updateShapeConfig(start, end)
+  }
+
+  class DotShape {
+    -Position position
+    ID = 1
+  }
+
+  class LineShape {
+    -Position start_position
+    -Position end_position
+    ID = 2
+  }
+
+  class RectangleShape {
+    -Position start_position
+    -Position end_position
+    ID = 3
+  }
+
+  class OvalShape {
+    -Position center_position
+    -Position corner_position
+    ID = 4
+  }
+
+  class Position {
+    <<struct>>
+    +int64_t x
+    +int64_t y
+  }
+
+  QMainWindow <|-- MainWindow
+  MainWindow *-- ShapesCanvas
+  QWidget <|-- ShapesCanvas
+  ShapesCanvas *-- MouseState
+  ShapesCanvas o-- Shape
+
+  Shape <|-- DotShape
+  Shape <|-- LineShape
+  Shape <|-- RectangleShape
+  Shape <|-- OvalShape
+  Shape ..> Position

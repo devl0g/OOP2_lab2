@@ -52,6 +52,10 @@ void ShapesCanvas::mouseReleaseEvent(QMouseEvent* event) {
     mouseState.isDragging = false;
 
     if (drawingShape) {
+      if (canvasShapes.size() >= 112) {
+        canvasShapes.erase(canvasShapes.begin() + 0);
+      }
+
       canvasShapes.push_back(std::move(drawingShape));
     }
 

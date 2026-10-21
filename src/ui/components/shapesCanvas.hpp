@@ -16,7 +16,9 @@ class ShapesCanvas : public QWidget {
     Q_OBJECT
 
 public:
-    explicit ShapesCanvas(QWidget* parent = nullptr) noexcept : QWidget(parent) {};
+    explicit ShapesCanvas(QWidget* parent = nullptr) noexcept : QWidget(parent) {
+      canvasShapes.reserve(112);
+    };
     ~ShapesCanvas() noexcept = default;
     ShapesCanvas(const ShapesCanvas& other) = delete;
     ShapesCanvas& operator=(ShapesCanvas other) = delete;
