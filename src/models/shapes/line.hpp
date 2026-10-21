@@ -32,7 +32,7 @@ public:
   }
 
   char* getShapeName() const noexcept override {
-    static char shape_name[] { "line" };
+    static char shape_name[] { "Лінія" };
     return shape_name;
   }
 

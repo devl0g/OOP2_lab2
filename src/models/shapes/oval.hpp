@@ -33,7 +33,7 @@ public:
   }
 
   char* getShapeName() const noexcept override {
-    static char shape_name[] { "oval" };
+    static char shape_name[] { "Овал" };
     return shape_name;
   }
 
@@ -60,8 +60,8 @@ public:
     painter.drawEllipse(
         center_position.x - half_size.x,
         center_position.y - half_size.y,
-        center_position.x + half_size.x,
-        center_position.y + half_size.y
+        half_size.x * 2,
+        half_size.y * 2
     );
   }
 
@@ -80,8 +80,8 @@ public:
     painter.drawEllipse(
         center_position.x - half_size.x,
         center_position.y - half_size.y,
-        center_position.x + half_size.x,
-        center_position.y + half_size.y
+        half_size.x * 2,
+        half_size.y * 2
     );
   }
 

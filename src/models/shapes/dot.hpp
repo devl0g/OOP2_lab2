@@ -23,7 +23,7 @@ public:
   }
 
   char* getShapeName() const noexcept override {
-    static char shape_name[] { "dot" };
+    static char shape_name[] { "Точка" };
     return shape_name;
   }
 
@@ -38,13 +38,13 @@ public:
   void renderShape(QPainter& painter) const override {
     painter.setBrush(QBrush(QColor(0, 0, 0)));
     painter.setPen(Qt::NoPen);
-    painter.drawEllipse(position.x - 2, position.y - 2, position.x + 2, position.y + 2);
+    painter.drawEllipse(position.x - 4, position.y - 4, 8, 8);
   }
 
   void renderPhantomShape(QPainter& painter) const override {
     painter.setBrush(QBrush(QColor(0, 0, 0, 100)));
     painter.setPen(Qt::NoPen);
-    painter.drawEllipse(position.x - 2, position.y - 2, position.x + 2, position.y + 2);
+    painter.drawEllipse(position.x - 4, position.y - 4, 8, 8);
   }
 
   void updateShapeConfig(const Position& drag_start, const Position& drag_end) noexcept override {

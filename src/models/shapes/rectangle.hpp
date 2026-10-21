@@ -33,7 +33,7 @@ public:
   }
 
   char* getShapeName() const noexcept override {
-    static char shape_name[] { "rectangle" };
+    static char shape_name[] { "Прямокутник" };
     return shape_name;
   }
 
